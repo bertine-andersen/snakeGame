@@ -29,13 +29,66 @@
             display: grid;
             grid-template-columns: repeat(20, 20px);
             grid-template-rows: repeat(20, 20px);
+            margin: 5px;
+        }
+
+        .gameBorder1 {
+            border: 10px solid #595f43;
+            border-radius: 30px;
+            box-shadow: inset 0 0 0 10px #595f43;
+        }
+
+        .gameBorder2 {
+            border: 8px solid #abb78a;
+            border-radius: 26px;
+            box-shadow: inset 0 0 0 10px #abb78a;
+        }
+
+        .gameBorder3 {
+            border: 30px solid #8b966c;
+            border-radius: 20px;
+            box-shadow: inset 0 0 0 5px #8b966c;
+        }
+
+        #instruksjon {
+            position: absolute;
+            top: 60%;
+            color: #333;
+            width: 300px;
+            text-align: center;
+            text-transform: capitalize;
+            padding: 30px;
+            margin: 0;
+        }
+
+        .scores {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #score {
+            color: abb78a;
+        }
+
+        #heighScore {
+            color: #d8ddca;
+            display: none;
+        }
+
+        .snake {
+            border: 1px dotted #5a5a5a;
+        } 
+
+        .food {
+            background-color: #dedede;
+            border: 5px solid #999;
         }
     </style>
 </head>
 
 <body>
-    <div class="scores">
-        <h1 class="score">000</h1>
+    <div id="scores">
+        <h1 id="score">000</h1>
         <h1 class="heighScore">000</h1>
     </div>
 
@@ -47,13 +100,62 @@
         </div>
     </div>
 
-    <h1>Trykk spacebar for å starte</h1>
+    <h1 id="instruksjon">Trykk spacebar for å starte</h1>
 
     <script>
-        const canvas = document.getElementById("Canvas");
-        const ctx = canvas.getContext("2d");
-        canvas.width = 600;
-        canvas.height = 600;
+        const board = document.getElementById("#gameBoard")
+
+        const gridSize = 20;
+        let snake = [{x: 10, y: 10}];
+        let food = generateFood();
+        let direction = 'right'
+        
+        function draw() {
+            board.innerHTML = '';
+            drawSnake();
+            drawFood();
+        }
+
+        function drawSnake() {
+            snake.forEach((segment) => {
+                const snakeEl = createGameElement("div", "snake");
+                setPosition(snakeEl, segment)
+            });
+        }
+
+        function createGameElement(tag, className) {
+            const element = document.createElement(tag);
+            element.className = className;
+            return element;
+        }
+
+        function setPosition(element, position) {
+            element.style.gridColumn = position.x;
+            element.style.gridRow = position.y;
+        }
+
+        draw()
+        
+        function drawFood() {
+            const foodEl = createGameElement("div", "food")
+            setPosition(foodEl, food)
+            board.appendChild(foodEl)
+        }
+
+        function generateFood() {
+            const x = Math.floor(Math.random() * gridSize) + 1;
+            const y = Math.floor(Math.random() * gridSize) + 1;
+            return (x, y);
+        }
+
+        function move() {
+            const head = {...snake[0]}
+            switch (direction) {
+                case 'right':
+                    head.x++;
+                    break;
+            }
+        }
 
     </script>
 </body>
