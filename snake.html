@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        .snake {
+            background-color: #414141;
+        }
+
+        #gameBoard {
+            border-radius: 100px;
+            display: grid;
+            grid-template-columns: repeat(20, 20px);
+            grid-template-rows: repeat(20, 20px);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="scores">
+        <h1 class="score">000</h1>
+        <h1 class="heighScore">000</h1>
+    </div>
+
+    <div class="gameBorder1">
+        <div class="gameBorder2">
+            <div class="gameBorder3">
+                <div id="gameBoard"></div>
+            </div>
+        </div>
+    </div>
+
+    <h1>Trykk spacebar for å starte</h1>
+
+    <script>
+        const canvas = document.getElementById("Canvas");
+        const ctx = canvas.getContext("2d");
+        canvas.width = 600;
+        canvas.height = 600;
+
+    </script>
+</body>
+
+</html>
