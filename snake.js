@@ -1,8 +1,8 @@
-const board = document.getElementById("gameBoard");
-const instruction = document.getElementById("instruction");
-const score = document.getElementById("score");
-const highScoreText = document.getElementById("highScore");
+const board = document.getElementById("gameBoard")
 const gridSize = 20;
+const instruction = document.getElementById("instruction")
+const score = document.getElementById("score")
+const highScoreText = document.getElementById("highScore")
 
 let snake = [{ x: 10, y: 10 }];
 let food = generateFood();
@@ -47,9 +47,14 @@ function drawFood() {
 }
 
 function generateFood() {
-    const x = Math.floor(Math.random() * gridSize) + 1;
-    const y = Math.floor(Math.random() * gridSize) + 1;
-    return { x, y };
+    let newFood;
+    do {
+        newFood = {
+            x: Math.floor(Math.random() * gridSize) + 1,
+            y: Math.floor(Math.random() * gridSize) + 1
+        };
+    } while (snake.some(segment => segment.x === newFood.x && segment.y === newFood.y));
+    return newFood;
 }
 
 function move() {
@@ -150,18 +155,16 @@ function checkCollision() {
     }
 }
 
-function gameOver() {
+function resetGame() {
+    clearInterval(gameInterval);
+    updateScore();
     updateHighScore();
     stopGame();
-}
-
-function resetGame() {
     snake = [{ x: 10, y: 10 }]
     food = generateFood();
     direction = "right"
     gameSpeedDelay = 200;
-    updateScore();
-    instruction.style.display = "block";
+    gameStarted = false;
 }
 
 function updateScore() {
@@ -172,18 +175,13 @@ function updateScore() {
 function stopGame() {
     clearInterval(gameInterval);
     instruction.style.display = "block";
-    document.body.appendChild(gameOverScreen);
 }
 
 function updateHighScore() {
     const currentScore = snake.length - 1;
-
     if (currentScore > highScore) {
         highScore = currentScore;
-        highScoreText.textContent = highScore.toString().padStart(3, "0");
-    } else {
-        highScoreText.textContent = highScore.toString().padStart(3, "0");
+        highScoreText.textContent = highScore.toString().padStart(3, "0")
     }
-
-    highScoreText.style.display = "block";
+    highScoreText.style.display = "block"
 }
