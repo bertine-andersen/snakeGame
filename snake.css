@@ -15,8 +15,8 @@ body {
 #gameBoard {
     border-radius: 100px;
     display: grid;
-    grid-template-columns: repeat(20, 27px);
-    grid-template-rows: repeat(20, 27px);
+    grid-template-columns: repeat(20, 26px);
+    grid-template-rows: repeat(20, 26px);
     margin: 5px;
 }
 
@@ -39,14 +39,28 @@ body {
     background-color: #c4cfa3;
 }
 
-#instruction {
+#text {
     position: absolute;
+    display: flex;
+    flex-direction: column;
     color: #333;
-    width: 400px;
+    width: 600px;
     text-align: center;
     text-transform: capitalize;
+    top: 25%;
     padding: 30px;
     margin: 0;
+}
+
+#gameOver {
+    padding: 70px;
+    padding-bottom: 100px;
+    font-size: 60px;
+    display: none;
+}
+
+#instruction {
+    padding-top: 180px;
 }
 
 .scores {
@@ -67,6 +81,19 @@ body {
     font-size: 40px;
     font-weight: bolder;
     margin: 10px 0;
+}
+
+.scoreName {
+    display: flex;
+    justify-content: space-between;
+}
+
+#sName,
+#hsName {
+    color: #595f45;
+    font-size: 35px;
+    font-weight: bolder;
+    margin: 2px;
 }
 
 .snake {

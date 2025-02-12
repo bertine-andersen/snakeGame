@@ -1,5 +1,6 @@
 const board = document.getElementById("gameBoard")
 const gridSize = 20;
+const gameOver = document.getElementById("gameOver")
 const instruction = document.getElementById("instruction")
 const score = document.getElementById("score")
 const highScoreText = document.getElementById("highScore")
@@ -11,6 +12,7 @@ let direction = 'right';
 let gameInterval;
 let gameSpeedDelay = 200;
 let gameStarted = false;
+let hasPlayed = false;
 
 function draw() {
     board.innerHTML = '';
@@ -94,6 +96,14 @@ function move() {
 function startGame() {
     gameStarted = true;
     instruction.style.display = "none";
+    gameOver.style.display = "none";
+
+    if (hasPlayed) {
+        gameOver.style.display = "none";
+    }
+
+    hasPlayed = true;
+
     gameInterval = setInterval(() => {
         move();
         checkCollision();
@@ -175,6 +185,12 @@ function updateScore() {
 function stopGame() {
     clearInterval(gameInterval);
     instruction.style.display = "block";
+    gameOver.style.display = "block";
+
+    if (hasPlayed) {
+        gameOver.style.display = "block";
+        instruction.style.padding = 0;
+    }
 }
 
 function updateHighScore() {
